@@ -1,16 +1,42 @@
+#!/usr/bin/env python3
+"""
+Simple TF-IDF Search Demo
+"""
+
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from utils import get_doc_info
 
-docs = ["Office equipment policy", 
-        "Office furniture guidelines",
-        "Office travel policy"]
+print("🔍 TF-IDF Search Demo")
+print("=" * 50)
 
-analyzer = TfidfVectorizer()
-word_scores = analyzer.fit_transform(docs)
+# Load documents from techcorp-docs
+docs, doc_paths = get_doc_info()
 
-print(word_scores.toarray())
+# Create TF-IDF matrix
+vectorizer = TfidfVectorizer()
+tfidf_matrix = vectorizer.fit_transform(docs)
 
-query = "furniture"
-query_score = analyzer.transform([query])
+# Example searches
+queries = ["remote work policy", "health insurance benefits", "pet policy dogs"]
 
-print(f"Query Score: {query_score.toarray()}")
-print(f"Query: {query} -> Document {get_document_id(scores) + 1}")
+for query in queries:
+    print(f"🔎 Searching for: '{query}'")
+    
+    # Transform query to TF-IDF
+    query_vector = vectorizer.transform([query])
+    
+    # Calculate similarities
+    similarities = cosine_similarity(query_vector, tfidf_matrix).flatten()
+    
+    # Get top results
+    top_indices = similarities.argsort()[-3:][::-1]
+    
+    print("Results:")
+    for i, idx in enumerate(top_indices, 1):
+        # Show only document path and score
+        doc_name = doc_paths[idx].split('/')[-1]  # Just the filename
+        print(f"  {i}. Score: {similarities[idx]:.4f} - {doc_name}")
+    print()
+
+print("✅ TF-IDF search completed!")

@@ -6,5 +6,8 @@ docs = ["Office equipment policy",
 
 bm25 = BM25Okapi([doc.split(" ") for doc in docs])
 
-word_scores = bm25.get_scores(  ["office", "policy"]  )
-print(word_scores)
+query = "furniture"
+query_scores = bm25.get_scores(query.split(" "))
+print(f"Query scores: {query_scores}")
+
+      
