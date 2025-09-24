@@ -1,0 +1,167 @@
+📦 What Gets Installed:
+ChromaDB: Vector database for storing embeddings
+
+Sentence Transformers: For creating text embeddings
+
+OpenAI: LLM integration
+
+Tiktoken: Token counting for smart chunking
+
+✅ Rank-BM25: Keyword search for hybrid retrieval
+
+***********************************************************************************************************
+Task -2
+
+Objective: Measure System Performance
+Run the RAG system test to see how well it answers AWS compliance queries. The target accuracy is 90%.
+
+cd /root/rag-debugging
+source venv/bin/activate
+python rag-system/rag_system.py
+
+
+What You'll See:
+
+System will test 11 compliance queries
+Each query result will be marked ✅ or ❌
+Final accuracy percentage will be calculated
+Target accuracy is 90% or higher
+
+----------------------------
+🧪 Testing RAG System with STRICT Criteria...
+==================================================
+✅ What are the S3 encryption requirements?...
+❌ What is policy AWS-POL-S3-001?...
+✅ EC2 instance tagging requirements...
+❌ CloudTrail logging configuration...
+❌ VPC security group rules...
+❌ IAM password policy minimum length...
+❌ RDS encryption at rest requirements...
+✅ Lambda function timeout limits...
+✅ EBS volume encryption policy...
+✅ CloudWatch log retention period...
+❌ AWS-POL-EC2-002 compliance details...
+
+📊 Accuracy: 45.5%
+🎯 Target: 90%
+📈 Gap: 44.5%
+
+📁 Results saved to: /root/rag-debugging/baseline_accuracy.txt
+
+📊 System Performance:
+Current Accuracy: 45.5%
+Target Accuracy: 90%
+
+⚠️ System needs optimization to reach target accuracy
+Consider analyzing the system for potential improvements.
+-------------------------------------------------------------
+Task 3: Analyze RAG System Problems with Qwen
+
+Qwen Should Identify:
+
+Problem 1: Poor chunking (200 char breaks)
+Problem 2: No metadata filtering
+Problem 3: Semantic search only
+Problem 4: No query enhancement
+
+
+Analyze the RAG system at /root/rag-debugging/rag-system/rag_system.py
+The system is only achieving 45% accuracy on compliance queries.
+
+
+
+1. Identify the 4 main problems causing poor accuracy
+2. For each problem, explain:
+   - What's wrong
+   - Why it impacts accuracy
+   - How to fix it
+3. Create a markdown report and save it as /root/rag-debugging/rag_issues.md
+
+Focus on:
+- Document chunking strategy
+- Metadata extraction
+- Search methodology
+- Query processing
+
+Answer:
+
+ ?  WriteFile Writing to rag_issues.md ←                                                              │
+ │                                                                                                      │
+ │ ... first 96 lines hidden ...                                                                        │
+ │  97                                                                                                  │
+ │  98 ## Implementation Priority                                                                       │
+ │  99 1. Fix chunking strategy (highest impact on retrieval quality)                                   │
+ │ 100 2. Enhance metadata extraction (enables better filtering and ranking)                            │
+ │ 101 3. Improve search methodology (removes artificial degradation)                                   │
+ │ 102 4. Add query processing (improves query understanding and relevance)                             │
+ │ 103                                                                                                  │
+ │ 104 ## Expected Accuracy Improvement                                                                 │
+ │ 105 Addressing these issues should improve accuracy from 45% to 75-85% by ensuring:                  │
+ │ 106 - Complete and coherent information retrieval                                                    │
+ │ 107 - Better relevance ranking and filtering                                                         │
+ │ 108 - More comprehensive query understanding                                                         │
+ │ 109 - Reliable and consistent search performance  
+
+
+ ✦ I've analyzed the RAG system and identified the 4 main problems causing the poor 45% accuracy. The
+  markdown report has been created at /root/rag-debugging/rag_issues.md with detailed explanations of each
+  issue and recommended fixes.
+
+  The key problems are:
+   1. Poor chunking - Fixed 120-character chunks that break mid-sentence
+   2. Minimal metadata - Only filename and chunk index, missing compliance-specific info
+   3. Degraded search - Intentional noise injection and limited to 1 result
+   4. No query processing - Raw queries without enhancement or compliance understanding
+
+  Implementing these fixes should significantly improve accuracy by ensuring coherent information
+  retrieval and better relevance matching.
+
+  ###################################################
+
+   Task 4: Implement All 4 Fixes with Qwen
+
+   Apply Complete Optimization
+Qwen will implement all 4 fixes to achieve 90%+ accuracy.
+
+Based on the problems identified in rag_issues.md, create an improved RAG system that fixes all 4 issues:
+
+1. **Smart Chunking**: Implement sentence-aware chunking with 512 tokens and 50 token overlap
+2. **Metadata Filtering**: Extract AWS service, section, and policy IDs for each chunk
+3. **Hybrid Search**: Combine 70% semantic + 30% keyword search with BM25
+4. **Query Enhancement**: Add acronym expansion and synonym support
+
+Create the improved system as /root/rag-debugging/improved_rag_system.py
+
+Ensure the system:
+- Uses tiktoken for proper token counting
+- Implements BM25 for keyword search
+- Extracts metadata for all AWS services
+- Enhances queries with domain-specific terms
+- Achieves 90%+ accuracy on the test cases1
+
+Expected Improvements
+Fix 1: Smart Chunking
+
++20% accuracy (45% → 65%)
+
+Fix 2: Metadata
+
++10% accuracy (65% → 75%)
+
+Fix 3: Hybrid Search
+
++10% accuracy (75% → 85%)
+
+Fix 4: Query Enhancement
+
++5% accuracy (85% → 90%+)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Task 5: Final Testing - Verify 90%+ Accuracy
+Test the Optimized System
+Run the improved system to verify it achieves target accuracy.
+
+cd /root/rag-debugging
+source venv/bin/activate
+python improved_rag_system.py
